@@ -5,6 +5,9 @@ A working prototype of a send-money flow that checks every transfer for scam pat
 
 Independent concept. Not affiliated with any bank or wallet. All names, numbers and amounts are fictional.
 
+- **Live prototype:** https://asharib725.github.io/safe-send/
+- **Figma library:** https://www.figma.com/design/xwTJW8Nh2Iwuu6JytEI57r (variables, 13 components, the send flow and a Figma ↔ code map)
+
 - **Figma library:** [Safe Send · Design system](https://www.figma.com/design/xwTJW8Nh2Iwuu6JytEI57r) (variables, 13 components, flow screens, Figma ↔ code map)
 - **Live prototype:** open `dist/index.html`, or the deployed link once it's up
 
