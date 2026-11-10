@@ -1,0 +1,56 @@
+:root {
+  --color-ink-900: #111214;
+  --color-ink-700: #3A3C42;
+  --color-ink-500: #6B6E76;
+  --color-ink-300: #A9ABB1;
+  --color-surface-canvas: #F3F2EE;
+  --color-surface-card: #FFFFFF;
+  --color-surface-sunken: #ECEBE6;
+  --color-surface-line: #E3E1DB;
+  --color-surface-inverse: #111214;
+  --color-accent-base: #3D5AFE;
+  --color-accent-soft: #E9EDFF;
+  --color-positive-fg: #0E7A50;
+  --color-positive-bg: #E6F4EC;
+  --color-positive-line: #A8D8BF;
+  --color-caution-fg: #8A5300;
+  --color-caution-bg: #FFF3DC;
+  --color-caution-line: #F2C46B;
+  --color-critical-fg: #B42318;
+  --color-critical-bg: #FDECEA;
+  --color-critical-line: #F2A39B;
+  --font-text: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Inter Display", "Inter", system-ui, -apple-system, sans-serif;
+  --font-urdu: "Noto Nastaliq Urdu", "Noto Naskh Arabic", "Jameel Noori Nastaleeq", "Geeza Pro", serif;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+  --elevation-1: 0 1px 2px rgba(17,18,20,.06);
+  --elevation-2: 0 8px 24px -12px rgba(17,18,20,.25);
+  --elevation-3: 0 24px 48px -20px rgba(17,18,20,.35);
+  --motion-fast: 120ms;
+  --motion-base: 220ms;
+  --motion-slow: 360ms;
+  --motion-ease-out: cubic-bezier(.2,.8,.2,1);
+  --motion-spring: cubic-bezier(.34,1.56,.64,1);
+  --size-tap-min: 44px;
+  --size-control: 52px;
+  --size-control-lg: 56px;
+}
+.t-display { font-family: var(--font-display); font-size: 44px; line-height: 48px; font-weight: 600; letter-spacing: -0.02em; }
+.t-title { font-family: var(--font-display); font-size: 24px; line-height: 30px; font-weight: 600; letter-spacing: -0.015em; }
+.t-headline { font-family: var(--font-text); font-size: 18px; line-height: 24px; font-weight: 600; letter-spacing: -0.01em; }
+.t-body { font-family: var(--font-text); font-size: 16px; line-height: 22px; font-weight: 400; letter-spacing: 0em; }
+.t-label { font-family: var(--font-text); font-size: 14px; line-height: 18px; font-weight: 600; letter-spacing: 0em; }
+.t-caption { font-family: var(--font-text); font-size: 12px; line-height: 16px; font-weight: 400; letter-spacing: 0.01em; }

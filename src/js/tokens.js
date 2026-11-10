@@ -1,0 +1,121 @@
+window.TOKENS = {
+ "$description": "Safe Send design tokens. Single source of truth: build.py turns this into CSS variables, and the Figma library uses the same names.",
+ "color": {
+  "ink": {
+   "900": "#111214",
+   "700": "#3A3C42",
+   "500": "#6B6E76",
+   "300": "#A9ABB1"
+  },
+  "surface": {
+   "canvas": "#F3F2EE",
+   "card": "#FFFFFF",
+   "sunken": "#ECEBE6",
+   "line": "#E3E1DB",
+   "inverse": "#111214"
+  },
+  "accent": {
+   "base": "#3D5AFE",
+   "soft": "#E9EDFF"
+  },
+  "positive": {
+   "fg": "#0E7A50",
+   "bg": "#E6F4EC",
+   "line": "#A8D8BF"
+  },
+  "caution": {
+   "fg": "#8A5300",
+   "bg": "#FFF3DC",
+   "line": "#F2C46B"
+  },
+  "critical": {
+   "fg": "#B42318",
+   "bg": "#FDECEA",
+   "line": "#F2A39B"
+  }
+ },
+ "font": {
+  "text": "\"Inter\", system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+  "display": "\"Inter Display\", \"Inter\", system-ui, -apple-system, sans-serif",
+  "urdu": "\"Noto Nastaliq Urdu\", \"Noto Naskh Arabic\", \"Jameel Noori Nastaleeq\", \"Geeza Pro\", serif"
+ },
+ "type": {
+  "display": {
+   "size": 44,
+   "line": 48,
+   "weight": 600,
+   "tracking": -0.02,
+   "family": "display"
+  },
+  "title": {
+   "size": 24,
+   "line": 30,
+   "weight": 600,
+   "tracking": -0.015,
+   "family": "display"
+  },
+  "headline": {
+   "size": 18,
+   "line": 24,
+   "weight": 600,
+   "tracking": -0.01,
+   "family": "text"
+  },
+  "body": {
+   "size": 16,
+   "line": 22,
+   "weight": 400,
+   "tracking": 0,
+   "family": "text"
+  },
+  "label": {
+   "size": 14,
+   "line": 18,
+   "weight": 600,
+   "tracking": 0,
+   "family": "text"
+  },
+  "caption": {
+   "size": 12,
+   "line": 16,
+   "weight": 400,
+   "tracking": 0.01,
+   "family": "text"
+  }
+ },
+ "space": {
+  "1": 4,
+  "2": 8,
+  "3": 12,
+  "4": 16,
+  "5": 20,
+  "6": 24,
+  "8": 32,
+  "10": 40,
+  "12": 48
+ },
+ "radius": {
+  "sm": 8,
+  "md": 12,
+  "lg": 16,
+  "xl": 24,
+  "pill": 999
+ },
+ "elevation": {
+  "1": "0 1px 2px rgba(17,18,20,.06)",
+  "2": "0 8px 24px -12px rgba(17,18,20,.25)",
+  "3": "0 24px 48px -20px rgba(17,18,20,.35)"
+ },
+ "motion": {
+  "fast": "120ms",
+  "base": "220ms",
+  "slow": "360ms",
+  "ease-out": "cubic-bezier(.2,.8,.2,1)",
+  "spring": "cubic-bezier(.34,1.56,.64,1)"
+ },
+ "size": {
+  "tap-min": 44,
+  "control": 52,
+  "control-lg": 56
+ }
+};
