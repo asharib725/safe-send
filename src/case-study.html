@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Safe Send · Case study · Asharib Rashid</title>
+<meta name="description" content="Case study: an AI-assisted scam check for mobile payments in Pakistan. Rules decide the risk, AI only explains it, in English or Urdu.">
+<style>
+/*FONTS*/
+</style>
+<link rel="stylesheet" href="styles/tokens.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--color-surface-canvas); color: var(--color-ink-900); font-family: var(--font-text); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding-inline: 28px; }
+  .read { max-width: 680px; }
+
+  /* nav */
+  .nav { position: sticky; top: 0; z-index: 10; background: rgba(243,242,238,.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-surface-line); }
+  .nav .wrap { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; text-decoration: none; }
+  .mark { width: 28px; height: 28px; border-radius: 8px; background: var(--color-ink-900); color: #fff; display: grid; place-items: center; }
+  .navlinks { display: flex; gap: 22px; font-size: 14px; color: var(--color-ink-500); }
+  .navlinks a { text-decoration: none; } .navlinks a:hover { color: var(--color-ink-900); }
+
+  /* hero */
+  .hero { padding-block: 88px 40px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--color-accent-base); }
+  h1 { margin-top: 16px; font: 600 72px/1 var(--font-display); letter-spacing: -.035em; }
+  .lede { margin-top: 20px; font-size: 22px; line-height: 32px; color: var(--color-ink-700); max-width: 760px; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; height: 48px; padding: 0 20px; border-radius: var(--radius-md); font: 600 15px/1 var(--font-text); text-decoration: none; }
+  .btn--primary { background: var(--color-ink-900); color: #fff; } .btn--primary:hover { background: var(--color-ink-700); }
+  .btn--secondary { background: var(--color-surface-card); box-shadow: inset 0 0 0 1px var(--color-surface-line); } .btn--secondary:hover { background: var(--color-surface-sunken); }
+  .meta { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--color-surface-line); }
+  .meta small { display: block; font-size: 12px; color: var(--color-ink-500); margin-bottom: 6px; }
+  .meta b { font-size: 15px; font-weight: 600; line-height: 22px; }
+
+  /* phones */
+  .phones { display: flex; justify-content: center; gap: 28px; padding: 32px 0 24px; }
+  .phone { width: 300px; flex: none; border-radius: 40px; padding: 8px; background: #0B0B0C; box-shadow: 0 40px 80px -40px rgba(17,18,20,.55); }
+  .phone img { display: block; width: 100%; height: auto; border-radius: 32px; }
+  .phone--sm { width: 260px; }
+  .cap { margin-top: 14px; text-align: center; font-size: 13px; color: var(--color-ink-500); }
+
+  /* sections */
+  section { padding-block: 72px; border-top: 1px solid var(--color-surface-line); }
+  .num { font: 600 13px/1 var(--font-text); color: var(--color-ink-300); letter-spacing: .06em; }
+  h2 { margin-top: 10px; font: 600 38px/44px var(--font-display); letter-spacing: -.025em; max-width: 820px; }
+  p.body { margin-top: 16px; font-size: 17px; line-height: 28px; color: var(--color-ink-700); }
+  p.body + p.body { margin-top: 14px; }
+  sup a { color: var(--color-accent-base); text-decoration: none; font-size: 11px; font-weight: 600; margin-left: 1px; }
+  .grid { display: grid; gap: 16px; margin-top: 32px; }
+  .g3 { grid-template-columns: repeat(3, 1fr); } .g2 { grid-template-columns: repeat(2, 1fr); }
+  .card { background: var(--color-surface-card); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--elevation-1); }
+  .card h3 { font: 600 18px/24px var(--font-text); letter-spacing: -.01em; }
+  .card p { margin-top: 8px; font-size: 15px; line-height: 23px; color: var(--color-ink-700); }
+  .stat b { display: block; font: 600 44px/48px var(--font-display); letter-spacing: -.03em; }
+  .stat p { margin-top: 10px; }
+  .tag { display: inline-block; font: 600 11px/1 ui-monospace, "DejaVu Sans Mono", monospace; letter-spacing: .04em; text-transform: uppercase; color: var(--color-ink-500); margin-bottom: 12px; }
+  .split { display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: stretch; margin-top: 32px; }
+  .split .arrow { align-self: center; color: var(--color-ink-300); font-size: 28px; }
+  .card--rules { border-top: 4px solid var(--color-ink-900); } .card--ai { border-top: 4px solid var(--color-accent-base); }
+  .levels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 40px; }
+  .level .phone { width: 100%; }
+  .level h3 { margin-top: 20px; font: 600 18px/24px var(--font-text); display: flex; align-items: center; gap: 8px; }
+  .level h3 i { width: 10px; height: 10px; border-radius: 50%; }
+  .level p { margin-top: 6px; font-size: 15px; line-height: 23px; color: var(--color-ink-700); }
+  .rules { list-style: none; margin-top: 28px; display: grid; gap: 0; background: var(--color-surface-card); border-radius: var(--radius-lg); box-shadow: var(--elevation-1); overflow: hidden; }
+  .rules li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--color-surface-line); font-size: 15px; line-height: 22px; }
+  .rules li:last-child { border-bottom: 0; }
+  .x { width: 22px; height: 22px; border-radius: 50%; background: var(--color-critical-bg); color: var(--color-critical-fg); display: grid; place-items: center; font-weight: 700; font-size: 12px; }
+  .drafts { margin-top: 16px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .draft { padding: 16px 18px; border-radius: var(--radius-md); background: var(--color-critical-bg); border: 1px solid var(--color-critical-line); }
+  .draft q { display: block; font-weight: 600; font-size: 15px; } .draft span { display: block; margin-top: 4px; font-size: 13px; color: var(--color-ink-700); }
+  .shot { margin-top: 32px; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--elevation-2); background: #fff; }
+  .shot img { display: block; width: 100%; height: auto; }
+  .row2 { display: grid; grid-template-columns: 300px 1fr; gap: 56px; align-items: center; margin-top: 8px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .chip { padding: 8px 14px; border-radius: var(--radius-pill); background: var(--color-surface-card); box-shadow: inset 0 0 0 1px var(--color-surface-line); font-size: 14px; font-weight: 600; }
+  .chip em { font-style: normal; color: var(--color-ink-500); font-weight: 400; }
+  .list { list-style: none; margin-top: 24px; display: grid; gap: 14px; }
+  .list li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; font-size: 16px; line-height: 25px; color: var(--color-ink-700); }
+  .list li::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--color-ink-900); margin: 9px 0 0 6px; }
+  .list b { color: var(--color-ink-900); }
+  .note { margin-top: 20px; display: inline-block; padding: 10px 14px; border-radius: var(--radius-md); background: var(--color-caution-bg); color: var(--color-caution-fg); font-size: 14px; font-weight: 600; }
+  .sources { margin-top: 20px; padding-left: 20px; display: grid; gap: 8px; font-size: 14px; line-height: 21px; color: var(--color-ink-500); }
+  .sources a { color: var(--color-ink-700); }
+  footer { padding-block: 48px 64px; border-top: 1px solid var(--color-surface-line); }
+  footer .wrap { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; font-size: 14px; color: var(--color-ink-500); }
+  footer b { color: var(--color-ink-900); }
+  :focus-visible { outline: 2px solid var(--color-accent-base); outline-offset: 3px; border-radius: 4px; }
+
+  @media (max-width: 900px) {
+    h1 { font-size: 52px; } h2 { font-size: 30px; line-height: 36px; }
+    .meta, .g3, .levels, .g2, .drafts { grid-template-columns: 1fr; }
+    .split { grid-template-columns: 1fr; } .split .arrow { transform: rotate(90deg); justify-self: center; }
+    .phones { justify-content: flex-start; overflow-x: auto; padding-left: 4px; scroll-snap-type: x mandatory; }
+    .phones .phone { width: 240px; scroll-snap-align: start; }
+    .row2 { grid-template-columns: 1fr; gap: 28px; } .row2 .phone { width: 260px; }
+    .navlinks { gap: 14px; font-size: 13px; }
+  }
+  @media (max-width: 480px) { .wrap { padding-inline: 20px; } .hero { padding-block: 56px 24px; } section { padding-block: 56px; } h1 { font-size: 44px; } .navlinks a:not(:first-child) { display: none; } .lede { font-size: 19px; line-height: 28px; } }
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Case study">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.2-7.5 9.5-4.3-1.3-7.5-4.9-7.5-9.5V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span>Safe Send</a>
+    <div class="navlinks"><a href="../index.html">Prototype</a><a href="https://www.figma.com/design/xwTJW8Nh2Iwuu6JytEI57r">Figma</a><a href="https://github.com/asharib725/safe-send">GitHub</a></div>
+  </div>
+</nav>
+
+<main>
+<header class="wrap hero">
+  <div class="eyebrow">Case study · Fintech · Independent concept</div>
+  <h1>Safe Send</h1>
+  <p class="lede">A send-money flow that checks every transfer for scam patterns before you confirm. Rules decide the risk. AI only explains it, in English or Urdu.</p>
+  <div class="ctas">
+    <a class="btn btn--primary" href="../index.html">Try the live prototype →</a>
+    <a class="btn btn--secondary" href="https://www.figma.com/design/xwTJW8Nh2Iwuu6JytEI57r">Figma library</a>
+    <a class="btn btn--secondary" href="https://github.com/asharib725/safe-send">Code on GitHub</a>
+  </div>
+  <div class="meta">
+    <div><small>Role</small><b>Product design, prototype, design system</b></div>
+    <div><small>Platform</small><b>Mobile wallet</b></div>
+    <div><small>Built with</small><b>Figma, HTML/CSS/JS, Claude</b></div>
+    <div><small>Date</small><b>November 2026</b></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="phones" role="group" aria-label="The flow from start to outcome">
+    <figure><div class="phone"><img src="assets/case-study/home.webp" alt="Wallet home screen with balance, a Send button and a note that Safe Send is on" width="600" height="1298"></div><figcaption class="cap">1 · Start a transfer</figcaption></figure>
+    <figure><div class="phone"><img src="assets/case-study/review-check.webp" alt="Review screen with an amber 'Check before you send' banner, its two reasons listed, and a 'Call M. Usman first' button" width="600" height="1298"></div><figcaption class="cap">2 · The check explains itself</figcaption></figure>
+    <figure><div class="phone"><img src="assets/case-study/stopped.webp" alt="Result screen: 'Nothing was sent', with a Report this number button" width="600" height="1298"></div><figcaption class="cap">3 · The scam never gets paid</figcaption></figure>
+  </div>
+</div>
+
+<section class="wrap" aria-labelledby="s1">
+  <div class="num">01 · PROBLEM</div>
+  <h2 id="s1">Most wallet fraud isn't hacking. It's persuasion.</h2>
+  <div class="read">
+    <p class="body">A call about a prize, a BISP payment or a "wrong transfer", and the account owner sends the money themselves. Pakistan's central bank names fake prize notifications and BISP payment claims among the common tactics, and calls customers the "first line of defence".<sup><a href="#src2">2</a></sup> Policy researchers make the same point: many scams target people, not technology.<sup><a href="#src3">3</a></sup></p>
+    <p class="body">Instant payments make this worse. Once money moves, it usually can't be pulled back, so the send screen is the last moment a product can help.</p>
+  </div>
+  <div class="grid g3">
+    <div class="card stat"><b>$9.3B</b><p>Estimated yearly scam losses in Pakistan, about 2.5% of GDP.<sup><a href="#src1">1</a></sup></p></div>
+    <div class="card stat"><b>46M</b><p>Raast IDs in use, so most people can be paid by mobile number.<sup><a href="#src4">4</a></sup></p></div>
+    <div class="card stat"><b>~17 s</b><p>For a Raast payment to reach the other person, per an SBP presentation.<sup><a href="#src5">5</a></sup></p></div>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="s2">
+  <div class="num">02 · THE CORE DECISION</div>
+  <h2 id="s2">Rules decide. AI explains.</h2>
+  <div class="read"><p class="body">A model deciding whether you may send money is hard to test and harder to explain. So risk comes from data the wallet already has. AI does the part it's good at: turning those signals into one or two plain sentences a person will actually read mid-payment.</p></div>
+  <div class="split">
+    <div class="card card--rules"><span class="tag">Detection · deterministic</span><h3>Rules find the signals</h3><p>Transfer history, reports from other users, account age and the wording of the note. Testable, explainable and the same every time.</p></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="card card--ai"><span class="tag">Explanation · AI, constrained</span><h3>AI writes the sentence</h3><p>From the detected signals only, in English or Urdu. It can't add a signal, change the level or block a payment.</p></div>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="s3">
+  <div class="num">03 · FRICTION THAT MATCHES RISK</div>
+  <h2 id="s3">Paying family stays one slide. A scam pattern gets a firm stop.</h2>
+  <div class="levels">
+    <div class="level"><div class="phone"><img src="assets/case-study/review-clear.webp" alt="Clear state" width="600" height="1298"></div>
+      <h3><i style="background:var(--color-positive-fg)"></i>Clear</h3><p>No extra step. The check runs in about a second and gets out of the way.</p></div>
+    <div class="level"><div class="phone"><img src="assets/case-study/review-check-closed.webp" alt="Check state" width="600" height="1298"></div>
+      <h3><i style="background:var(--color-caution-fg)"></i>Check</h3><p>A new number gets a "call them first" option and its reasons on request, not a wall.</p></div>
+    <div class="level"><div class="phone"><img src="assets/case-study/review-stop.webp" alt="Stop state" width="600" height="1298"></div>
+      <h3><i style="background:var(--color-critical-fg)"></i>Stop</h3><p>"Don't send" becomes the main action. Sending anyway takes a confirmation, never a block.</p></div>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="s4">
+  <div class="num">04 · GUARDRAILS</div>
+  <h2 id="s4">What the AI is never allowed to say</h2>
+  <div class="read"><p class="body">Five checks run on every explanation before anyone sees it. If one fails, the user gets the approved fallback instead.</p></div>
+  <ul class="rules">
+    <li><span class="x" aria-hidden="true">✕</span><span><b>No safety claims.</b> Never call a transfer or a person safe, verified or guaranteed.</span></li>
+    <li><span class="x" aria-hidden="true">✕</span><span><b>No accusations.</b> Describe the pattern, never call a person a scammer.</span></li>
+    <li><span class="x" aria-hidden="true">✕</span><span><b>No amounts.</b> The user decides how much to send.</span></li>
+    <li><span class="x" aria-hidden="true">✕</span><span><b>No certainty.</b> Patterns can be wrong.</span></li>
+    <li><span class="x" aria-hidden="true">✕</span><span><b>Two sentences at most.</b> People read this mid-payment.</span></li>
+  </ul>
+  <div class="drafts" aria-label="Drafts the validator rejects">
+    <div class="draft"><q>You're safe to send this.</q><span>Blocked: promises safety the system can't know.</span></div>
+    <div class="draft"><q>K. Ahmed is a scammer, don't pay him.</q><span>Blocked: accuses a named person.</span></div>
+    <div class="draft"><q>Try sending Rs 2,000 instead.</q><span>Blocked: suggests an amount.</span></div>
+    <div class="draft"><q>Our AI is 100% sure this is fraud.</q><span>Blocked: claims certainty.</span></div>
+  </div>
+  <div class="read"><p class="body">The rules aren't a slide. The prototype's AI rules tab runs every approved explanation and every rejected draft through the same validator, live in the browser.</p></div>
+  <div class="shot"><img src="assets/case-study/ai-live-check.webp" alt="The AI rules tab: a table where approved explanations pass and rejected drafts are blocked, with the failed rule named" width="1400" height="1261"></div>
+</section>
+
+<section class="wrap" aria-labelledby="s5">
+  <div class="num">05 · LANGUAGE</div>
+  <div class="row2">
+    <div class="phone"><img src="assets/case-study/review-stop-urdu.webp" alt="Stop state with the explanation and reasons in Urdu, right-aligned" width="600" height="1298"></div>
+    <div>
+      <h2 id="s5">Urdu, written for reading mid-payment</h2>
+      <p class="body">The explanation and its reasons switch to Urdu in a Nastaliq face, right-aligned, in plain words. The people most likely to get a prize call are the least likely to read a warning in English.</p>
+      <span class="note">Not tested with users yet. That's the first study I'd run.</span>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="s6">
+  <div class="num">06 · SMALL DECISIONS</div>
+  <h2 id="s6">The details that carry the design</h2>
+  <div class="grid g3">
+    <div class="card"><h3>Never "safe"</h3><p>The clear state says "No warning signs found", because the system can't know a transfer is safe.</p></div>
+    <div class="card"><h3>Phrases, not words</h3><p>"Claim fee" raises a flag. "School fee" sent to family doesn't.</p></div>
+    <div class="card"><h3>A tap can't send</h3><p>Sending takes a drag. A single tap on the slider only nudges it.</p></div>
+    <div class="card"><h3>No drag required</h3><p>Keyboard and screen-reader users confirm with Enter.</p></div>
+    <div class="card"><h3>Errors talk about money</h3><p>"Nothing left your account and your balance hasn't changed."</p></div>
+    <div class="card"><h3>Reasons on request</h3><p>"Why am I seeing this?" lists the exact signals behind every warning.</p></div>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="s7">
+  <div class="num">07 · BUILT AS A SYSTEM</div>
+  <h2 id="s7">One source of truth, in code and in Figma</h2>
+  <div class="read"><p class="body">One tokens file feeds both the CSS variables and the Figma variables, under the same names. The 13 components exist once in code and once in Figma, and each Figma component's description carries its code signature. Changes go in through pull requests, and every merge redeploys the live prototype.</p></div>
+  <div class="chips"><span class="chip">42 <em>variables</em></span><span class="chip">13 <em>components</em></span><span class="chip">7 <em>flow screens</em></span><span class="chip">1 <em>tokens file</em></span><span class="chip">0 <em>dependencies</em></span></div>
+  <div class="shot"><img src="assets/case-study/figma-flows.webp" alt="The send flow in Figma: seven screens built only from library component instances" width="2400" height="782"></div>
+</section>
+
+<section class="wrap" aria-labelledby="s8">
+  <div class="g2 grid" style="margin-top:0;gap:56px">
+    <div>
+      <div class="num">08 · HOW I'D KNOW IT WORKS</div>
+      <h2 id="s8">What I'd measure</h2>
+      <ul class="list">
+        <li><span>Share of transfers to <b>reported numbers</b> that end in "Don't send".</span></li>
+        <li><span><b>False alarms</b> on people you've paid before. Target: close to zero.</span></li>
+        <li><span><b>Time added</b> to a clear transfer. Target: under 1.5 seconds.</span></li>
+        <li><span>Whether <b>Urdu explanations</b> change what people do.</span></li>
+      </ul>
+      <span class="note">This is a concept. None of it is measured yet.</span>
+    </div>
+    <div>
+      <div class="num">09 · WHAT I LEFT OUT</div>
+      <h2>What I chose not to do</h2>
+      <ul class="list">
+        <li><span><b>No risk score.</b> "73% risk" invites false precision. Three plain levels don't.</span></li>
+        <li><span><b>No chatbot.</b> Sending money isn't a conversation.</span></li>
+        <li><span><b>No hard blocks.</b> People pay new contacts every day. The user stays in control.</span></li>
+        <li><span><b>No real brand.</b> Independent concept, fictional names and numbers.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="s10">
+  <div class="num">SOURCES</div>
+  <h2 id="s10" style="font-size:24px;line-height:30px">Sources</h2>
+  <ol class="sources">
+    <li id="src1">Global State of Scams Report 2025 (Global Anti-Scam Alliance and Feedzai), as reported by <a href="https://tribune.com.pk/story/2573384/scams-costing-33-more-than-7b-imf-loan">The Express Tribune</a>.</li>
+    <li id="src2">State Bank of Pakistan at the Future Banking Summit 2026, as reported by <a href="https://digitalpakistan.pk/sbp-calls-for-greater-vigilance-against-evolving-digital-banking-scams/">Digital Pakistan</a>.</li>
+    <li id="src3"><a href="https://sdpi.org/11377/blogs_detail">SDPI, "Ensuring cybersecurity"</a>.</li>
+    <li id="src4"><a href="https://www.inp.net.pk/news-detail/inp-wealthpk/digital-fraud-poses-major-threat-to-pakistans-cashless-ambition">INP-WealthPK, November 2025</a>.</li>
+    <li id="src5"><a href="https://www.itu.int/en/ITU-T/webinars/dfs/20250429/Documents/ITU%20Webinar%20Slide%20Deck%20Rehan%20Masood.pdf">ITU Digital Financial Services webinar, State Bank of Pakistan presenter, 2025</a>.</li>
+  </ol>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><b>Asharib Rashid</b> · Lead UX &amp; Product Designer</span>
+    <span>Independent concept · not affiliated with any bank or wallet</span>
+  </div>
+</footer>
+</body>
+</html>

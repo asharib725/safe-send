@@ -4,6 +4,7 @@
 1. tokens/tokens.json  -> src/styles/tokens.css   (CSS custom properties + type classes)
 2. Inter subsets       -> base64 WOFF @font-face  (so the live page looks the same everywhere)
 3. src/index.html      -> dist/index.html          (CSS and JS inlined into one file)
+4. src/case-study.html -> dist/case-study/index.html (fonts and screenshots inlined)
 
 No dependencies beyond Python 3 and fontTools.
 """
@@ -77,6 +78,21 @@ def inline(html):
     return html
 
 
+def build_case_study(fonts):
+    """src/case-study.html -> dist/case-study/index.html, with fonts and screenshots inlined."""
+    src = SRC / "case-study.html"
+    if not src.exists():
+        return
+    html = inline(src.read_text()).replace("/*FONTS*/", fonts)
+    def img(m):
+        data = base64.b64encode((ROOT / m.group(1)).read_bytes()).decode()
+        return f'src="data:image/webp;base64,{data}"'
+    html = re.sub(r'src="(assets/[^"]+\.webp)"', img, html)
+    out = DIST / "case-study"; out.mkdir(parents=True, exist_ok=True)
+    (out / "index.html").write_text(html)
+    print(f"dist/case-study/index.html  {len(html)/1024:.0f} KB")
+
+
 def main():
     tok = json.loads((ROOT / "tokens" / "tokens.json").read_text())
     (SRC / "styles").mkdir(parents=True, exist_ok=True)
@@ -84,10 +100,12 @@ def main():
     # tokens are also exposed to JS so the design-system page renders from the same source
     (SRC / "js" / "tokens.js").write_text("window.TOKENS = " + json.dumps(tok, indent=1) + ";\n")
     html = inline((SRC / "index.html").read_text())
-    html = html.replace("/*FONTS*/", font_faces())
+    fonts = font_faces()
+    html = html.replace("/*FONTS*/", fonts)
     DIST.mkdir(exist_ok=True)
     (DIST / "index.html").write_text(html)
     print(f"dist/index.html  {len(html)/1024:.0f} KB")
+    build_case_study(fonts)
 
 
 if __name__ == "__main__":

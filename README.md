@@ -6,6 +6,7 @@ A working prototype of a send-money flow that checks every transfer for scam pat
 Independent concept. Not affiliated with any bank or wallet. All names, numbers and amounts are fictional.
 
 - **Live prototype:** https://asharib725.github.io/safe-send/
+- **Case study:** https://asharib725.github.io/safe-send/case-study/
 - **Figma library:** https://www.figma.com/design/xwTJW8Nh2Iwuu6JytEI57r (variables, 13 components, the send flow and a Figma ↔ code map)
 
 - **Figma library:** [Safe Send · Design system](https://www.figma.com/design/xwTJW8Nh2Iwuu6JytEI57r) (variables, 13 components, flow screens, Figma ↔ code map)
@@ -29,6 +30,9 @@ src/js/app.js             screens, navigation, scenario panel, docs tabs
 src/styles/               tokens.css (generated), components.css, app.css
 scripts/build.py          tokens → CSS, font subsetting, inlines everything into dist/index.html
 scripts/test_flow.py      drives every path in headless Chrome and saves screenshots
+scripts/capture_case_study.py  captures the real prototype states used in the case study
+src/case-study.html       the case study page (built to dist/case-study/index.html)
+assets/case-study/        screenshots used by the case study
 dist/index.html           the built, self-contained page (deploy this anywhere)
 ```
 
@@ -50,6 +54,6 @@ The Figma file uses one variable collection whose paths match `tokens/tokens.jso
 ## Next
 
 - Usability test of the Urdu explanations
-- Case study write-up and a 90-second walkthrough video
+- 90-second walkthrough video
 
 Built with Claude as an AI pair-programmer.
